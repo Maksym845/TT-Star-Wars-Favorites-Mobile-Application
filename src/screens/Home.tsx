@@ -149,7 +149,7 @@ export const Home = () => {
               />
             )}
             <View style={styles.footerInner}>
-              <Text>{startIndex} - {endIndex}</Text>
+              <Text style={[styles.paginationText, { marginRight: 10 }]}>{startIndex} - {endIndex}</Text>
               <Text style={styles.paginationText}>of {totalCount}</Text>
               <TouchableOpacity
                 onPress={handlePressPrev}
@@ -180,6 +180,7 @@ export const Home = () => {
         keyExtractor={item => item.url}
         ListHeaderComponent={ListHeaderComponent}
         ListFooterComponent={ListFooterComponent}
+        contentContainerStyle={{ paddingBottom: 20 }}
         refreshControl={
           <RefreshControl
             refreshing={reqStatus === ReqStatusEnum.REFRESH}
@@ -245,7 +246,6 @@ const styles = StyleSheet.create({
   },
   paginationText: {
     ...typography.h4,
-    marginRight: 30,
     fontWeight: 'normal',
   },
   rightButton: {
