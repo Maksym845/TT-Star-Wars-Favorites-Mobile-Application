@@ -12,6 +12,7 @@ import { PersonTile } from 'components/Home/PersonTile';
 import { TableHeader } from 'components/Home/TableHeader';
 import { UiLoader } from 'components/base/UiLoader';
 import { UISearch } from 'components/base/UISearch';
+import { getFavouritesFromAsyncStorage } from 'utils/helpers';
 
 export const Home = () => {
   const { data, reqStatus, fetch, totalCount } = usePeople();
@@ -37,6 +38,14 @@ export const Home = () => {
 
   useEffect(() => {
     fetchData();
+
+    (async function getData() {
+      const savedData = await getFavouritesFromAsyncStorage();
+
+      if (savedData) {
+        setSelectedPeople(savedData);
+      }
+    })();
   }, []);
 
   const startIndex = useMemo(() => (page - 1) * 10 + 1, [page]);

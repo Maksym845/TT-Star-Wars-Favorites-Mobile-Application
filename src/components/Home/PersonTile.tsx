@@ -6,7 +6,7 @@ import { typography } from 'utils/typography';
 import { IPerson, SelectedPeople } from 'types/people';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList, ScreenEnum } from 'types/navigation';
-import { shortlyText } from 'utils/helpers';
+import { shortlyText, writeFavouritesToAsyncStorage } from 'utils/helpers';
 
 interface Props {
   person: IPerson,
@@ -30,7 +30,12 @@ export const PersonTile: React.FC<Props> = ({ person, selectedPeople, setSelecte
   }, [personId]);
 
   const handleOnPressHeart = useCallback(() => {
-    setSelectedPeople(prevState => toggleGenderCount(prevState, person.gender));
+    setSelectedPeople(prevState => {
+      const updatedFavourites = toggleGenderCount(prevState, person.gender);
+      writeFavouritesToAsyncStorage(updatedFavourites);
+
+      return updatedFavourites;
+    });
   }, [person.gender, setSelectedPeople, toggleGenderCount]);
 
   return (

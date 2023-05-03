@@ -19,3 +19,7 @@ export interface IGetPersonData {
   actionType: ActionType;
   id: string;
 }
+
+export enum AsyncStorageEnum {
+  FAVOURITE_LIST = 'FAVOURITE_LIST',
+}

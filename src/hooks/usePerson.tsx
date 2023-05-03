@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { IGetPersonData, ReqStatusEnum } from 'types';
-import { IFullPersonData, IPeople, IPerson } from 'types/people';
+import { IFullPersonData, IPerson } from 'types/people';
 import { getReqStatusByActionType } from 'utils/helpers';
 import { getPerson } from 'api/person';
 import { IPlanet } from 'types/planets';
@@ -29,12 +29,6 @@ export const usePerson = () => {
 
         const { data: respDataPlanet }: { data: IPlanet | null } = await getPlanet(planetId);
         const { data: respDataSpecies }: { data: ISpecies | null } | undefined = await getSpecies(speciesID);
-
-        console.log('resp data', {
-          ...respDataPerson,
-          homeWorld: respDataPlanet,
-          species: respDataSpecies,
-        });
 
         setData({
           ...respDataPerson,
